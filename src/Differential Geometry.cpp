@@ -4,7 +4,7 @@
 using namespace std;
 
 //Take two 4-vectors and a 4x4 metric and return their inner product. 
-double InnerProduct(double* v1, double* v2, double* metric)
+double InnerProduct(double const* v1, double const* v2, double const* metric)
 {
     static double result;
     static double downvec[4];
@@ -18,7 +18,7 @@ double InnerProduct(double* v1, double* v2, double* metric)
 }
 
 //Set a vector to be the product of a 4x4 matrix and a 4-vector. 
-void MatrixDotVector(double* newvec, double* mtrx, double* vec)
+void MatrixDotVector(double* newvec, double const* mtrx, double const* vec)
 {
     static double temp[4];
     temp[0] =  mtrx[0]*vec[0] +  mtrx[1]*vec[1] +  mtrx[2]*vec[2] +  mtrx[3]*vec[3];
@@ -43,13 +43,13 @@ void Transpose(double *mtrx)
 }
 
 //set 4-vector 'range' to be a copy of 4-vector 'domain'.
-void CopyVector(double* range, double* domain)
+void CopyVector(double* range, double const* domain)
 {
     for(int i = 0; i < 4; i++) range[i] = domain[i];
 }
 
 //Set 'inverse' to be the inverse of 4x4 matrix 'm'
-void InverseMatrix(double* inverse, double* m)
+void InverseMatrix(double* inverse, double const* m)
 {
     static double det;
     det = m[1]*m[11]*m[14]*m[4] - m[1]*m[10]*m[15]*m[4] - m[11]*m[13]*m[2]*m[4] + m[10]*m[13]*m[3]*m[4] - m[0]*m[11]*m[14]*m[5] + m[0]*m[10]*m[15]*m[5] + m[11]*m[12]*m[2]*m[5] - m[10]*m[12]*m[3]*m[5] - m[1]*m[11]*m[12]*m[6] + m[0]*m[11]*m[13]*m[6] + m[1]*m[10]*m[12]*m[7] - m[0]*m[10]*m[13]*m[7] - m[15]*m[2]*m[5]*m[8] + m[14]*m[3]*m[5]*m[8] + m[1]*m[15]*m[6]*m[8] - m[13]*m[3]*m[6]*m[8] - m[1]*m[14]*m[7]*m[8] + m[13]*m[2]*m[7]*m[8] + m[15]*m[2]*m[4]*m[9] - m[14]*m[3]*m[4]*m[9] - m[0]*m[15]*m[6]*m[9] + m[12]*m[3]*m[6]*m[9] + m[0]*m[14]*m[7]*m[9] - m[12]*m[2]*m[7]*m[9];
@@ -74,7 +74,7 @@ void InverseMatrix(double* inverse, double* m)
 
 //Given a set of four 4-vectors and a metric, 
 //  turn them into an orthonormal set. 
-void Orthonormalize(double* mtrx, double* metric)
+void Orthonormalize(double* mtrx, double const* metric)
 {
     double ip;
     int i, j, k;

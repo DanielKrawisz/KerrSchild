@@ -56,7 +56,7 @@ void EddingtonFinkelsteinCoordinateConversion(double *x, double m, double a, int
 //  The parameter 'n' can be used to convert between different kinds of EF coordinates.
 //  For example, a value of -1 converts back from EF coordinates to
 //  ordinary radial coordinates. 
-void EddingtonFinkelsteinCoordinateTransformation(double *v, double *x, double m, double a, int n)
+void EddingtonFinkelsteinCoordinateTransformation(double *v, double const* x, double m, double a, int n)
 {
     static double delta;
 
@@ -87,7 +87,7 @@ void RadialToCartesianCoordinateConversion(double *x, double m, double a)
 }
 
 //Convert a vector at a point from Radial to Cartesian.
-void RadialToCartesianCoordinateTransformation(double *v, double *x, double m, double a)
+void RadialToCartesianCoordinateTransformation(double *v, double const* x, double m, double a)
 {
     static double t, r, theta, phi, S;
     static double transformation[] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -141,7 +141,7 @@ void CartesianToRadialCoordinateConversion(double *x, double m, double a, int di
 }
 
 //Convert a vector at a point from Cartesian to Radial.
-void CartesianToRadialCoordinateTransformation(double *v, double *x, double m, double a, int direction)
+void CartesianToRadialCoordinateTransformation(double *v, double const* x, double m, double a, int direction)
 {
     //TODO: figure out all the cases for what to do with the logorithms with negative and positive r. 
     static double conversion[] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};

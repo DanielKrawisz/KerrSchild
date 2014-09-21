@@ -20,13 +20,13 @@ double BlackHoleArcTan(double r, double m, double a);
 //  can be used to convert between different kinds of EF coordinates.
 //  For example, a value of -1 converts back from EF coordinates to
 //  ordinary radial coordinates. 
-void EddingtonFinkelsteinCoordinateTransformation(double *v, double *x, double m, double a, int n);
-void EddingtonFinkelsteinCoordinateConversion(double *x, double m, double a, int n);
+void EddingtonFinkelsteinCoordinateTransformation(double* v, double const* x, double m, double a, int n);
+void EddingtonFinkelsteinCoordinateConversion(double* x, double m, double a, int n);
 
 //Radial to Cartesian.
-void RadialToCartesianCoordinateTransformation(double *v, double *x, double m, double a);
-void RadialToCartesianCoordinateConversion(double *x, double m, double a);
+void RadialToCartesianCoordinateTransformation(double* v, double const* x, double m, double a);
+void RadialToCartesianCoordinateConversion(double* x, double m, double a);
 
 //Cartesian to Radial. 
-void CartesianToRadialCoordinateTransformation(double *v, double *x, double m, double a, int direction);
-void CartesianToRadialCoordinateConversion(double *x, double m, double a, int direction);
+void CartesianToRadialCoordinateTransformation(double* v, double const* x, double m, double a, int direction);
+void CartesianToRadialCoordinateConversion(double* x, double m, double a, int direction);

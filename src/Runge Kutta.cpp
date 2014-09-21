@@ -6,19 +6,9 @@ using namespace std;
 RungeKuttaForm::RungeKuttaForm(int st, int o, bool f, double rka[], double rkb[], double rkc[], double rkd[]){
 //    int i;
     steps = st;
-	order = o;
-	fsal = f;
+    order = o;
+    fsal = f;
     a = rka; b = rkb; c=rkc; d=rkd;
-    /*a = new double[steps*steps];
-    b = new double[steps + 1];
-    c = new double[steps];
-    d = new double[steps + 1];
-    for(i = 0; i < steps*steps; i++) a[i] = rka[i];
-    for(i = 0; i < steps; i++) c[i] = rkc[i];
-    for(i = 0; i <= steps; i++) {
-        b[i] = rkb[i];
-        d[i] = rkd[i];
-    }*/
 }
 
 RungeKuttaForm::~RungeKuttaForm(){
@@ -28,11 +18,11 @@ RungeKuttaForm::~RungeKuttaForm(){
     delete[] d;
 }
 
-RungeKuttaData::RungeKuttaData(RungeKuttaForm *data, int nn){
+RungeKuttaData::RungeKuttaData(RungeKuttaForm const* data, int nn){
     int i;
-    steps = data->steps-1;
-    order = data->order;
-    fsal = data->fsal;
+    steps = data->get_steps()-1;
+    order = data->get_order();
+    fsal = data->first_same_as_last();
     n = nn;
     a = new double[steps*steps];
     b = new double[steps + 1];
@@ -41,11 +31,11 @@ RungeKuttaData::RungeKuttaData(RungeKuttaForm *data, int nn){
     K = new double[steps*n];
     tmp = new double[n];
 
-    for(i = 0; i < steps*steps; i++) a[i] = data->a[i];
-    for(i = 0; i < steps; i++) c[i] = data->c[i];
+    for(i = 0; i < steps*steps; i++) a[i] = data->get_parameter_a(i);
+    for(i = 0; i < steps; i++) c[i] = data->get_parameter_c(i);
     for(i = 0; i <= steps; i++) {
-        b[i] = data->b[i];
-        db[i] = data->b[i] - data->d[i];
+        b[i] = data->get_parameter_b(i);
+        db[i] = data->get_parameter_b(i) - data->get_parameter_d(i);
     }
 }
 
@@ -64,7 +54,7 @@ RungeKuttaData::~RungeKuttaData(){
 // x2       - output: the new position.
 // err      - output: The estimated error. 
 // dx2      - output: the new velocity.
-void RungeKuttaData::step(void(*f)(double, double [], double []), double x[], double dx[], double t, double dt, double x2[], double err[], double dx2[]) {
+void const RungeKuttaData::step(void(*f)(double, double [], double []), double x[], double dx[], double t, double dt, double x2[], double err[], double dx2[]) {
     static int i, j, k, apos, kk;
     //Note that k is a counter whereas K stores data.
     apos = 0;
@@ -120,7 +110,7 @@ void RungeKuttaData::step(void(*f)(double, double [], double []), double x[], do
 // x2       - output: new position.
 // err      - output: estimated error.
 // dx2      - output: new velocity.
-double RungeKuttaData::timestep(void (*f)(double, double [], double[]), double x[], double a[], double t, double dt, double eps, double errscale, double x2[], double err[], double dx2[])
+double const RungeKuttaData::timestep(void (*f)(double, double [], double[]), double x[], double a[], double t, double dt, double eps, double errscale, double x2[], double err[], double dx2[])
 {
     static int i;
     static double errmax, accelmax, h, htemp, xnew, *ytemp;

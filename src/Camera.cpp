@@ -151,7 +151,7 @@ void Camera3D::GenerateCamera(double *position, double *look, int coord, int cam
 //  The initial step size.
 //  Coordinate code specifying the output coordinates to say where the light ray ends up. 
 //  A coordinate test function. 
-void Camera3D::Snapshot(RungeKuttaForm *solvedata, const char *file, int maxsteps, double maxdistance, double initstep, double errscale, int outputcoordinate, int (*coordtest)(int, double[], double[]))
+void Camera3D::Snapshot(RungeKuttaForm const *solvedata, char const*file, int maxsteps, double maxdistance, double initstep, double errscale, int outputcoordinate, int (*coordtest)(int, double[], double[]))
 {
     double error[17];
     double *lambda1, *lambda2, *temp, *dlambda1, *dlambda2;

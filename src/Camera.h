@@ -18,6 +18,7 @@ private:
     //  1 - future EF coordinates.
     //  2 - cartesian r > 0.
     //  3 - cartesian r < 0.
+    //  4 - radial coordinates. (standard Schwarzchild coordinates).
     int coordinate;
     //Camera parameters.
     // fovh, fovv - field of view values.
@@ -27,9 +28,9 @@ private:
     int    pixh, pixv, pix;
     //A matrix defining the parameters of the camera for computational purposes.
     double directions[16];
-    //The black hole in the universe. 
+    //The one black hole in the universe. 
     BlackHole *blackhole;
-    //
+    //Stores the data describing each light ray in the camera. 
     double *light;
   
     void GenerateCamera(double *position, double *look, int coord, int cameratype);
@@ -54,5 +55,5 @@ public:
     //  The initial step size.
     //  Coordinate code specifying the output coordinates to say where the light ray ends up. 
     //  A coordinate test function. 
-    void Snapshot(RungeKuttaForm *solvedata, const char *file, int maxsteps, double maxdistance, double initstep, double errscale, int outputcoordinate, int (*coordtest)(int, double[], double[]));
+    void Snapshot(RungeKuttaForm const* solvedata, char const* file, int maxsteps, double maxdistance, double initstep, double errscale, int outputcoordinate, int (*coordtest)(int, double[], double[]));
 };

@@ -2,7 +2,7 @@
 #include "Extra Math.h"
 
 //This also needs to be tested. 
-void boost(double *newv, double *v, double *x)
+void boost(double *newv, double *const v, double *const x)
 {
     static double b, g, gg;
     b = v[1]*v[1] + v[2]*v[2] + v[3]*v[3];
@@ -23,7 +23,7 @@ void boost(double *newv, double *v, double *x)
 }
 
 //Set 'newm' as the boosted form of a matrix 'm' boosted in direction 'x'.
-void boostmtrx(double *newm, double *m, double *x)
+void boostmtrx(double *newm, double *const m, double *const x)
 {
     static double b, g, gg;
     b = x[1]*x[1] + x[2]*x[2] + x[3]*x[3];
@@ -57,7 +57,7 @@ void boostmtrx(double *newm, double *m, double *x)
 
 //This returns the boost matrix but in the form of a symmetric tensor,
 //  which means that only 10 numbers will be used rather than 16. 
-void returntheboostmatrixasasymmetric2tensor(double *m, double *v)
+void returntheboostmatrixasasymmetric2tensor(double *m, double const* v)
 {
     static double b, g, gg;
     b = v[1]*v[1] + v[2]*v[2] + v[3]*v[3];
@@ -85,7 +85,7 @@ void returntheboostmatrixasasymmetric2tensor(double *m, double *v)
 }
 
 //Sets vdown as the dual vector to vup. 
-void etadual(double vdown[], double vup[])
+void etadual(double *vdown, double const* vup)
 {
     vdown[0] = vup[0]; vdown[1] = -vup[1]; vdown[2] = -vup[2]; vdown[3] = -vup[3];
 }
